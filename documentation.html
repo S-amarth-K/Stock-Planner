@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>IMLEP — Complete Logic & Methodology Documentation</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:#fff;color:#1e293b;font-size:13.5px;line-height:1.75}
+  .page{max-width:860px;margin:0 auto;padding:40px 50px}
+  h1{font-size:28px;font-weight:800;color:#0f172a;border-bottom:3px solid #3b82f6;padding-bottom:12px;margin-bottom:6px}
+  h2{font-size:19px;font-weight:700;color:#1e40af;margin:36px 0 10px;padding-left:10px;border-left:4px solid #3b82f6}
+  h3{font-size:15px;font-weight:600;color:#0f172a;margin:22px 0 8px}
+  h4{font-size:13px;font-weight:600;color:#334155;margin:14px 0 5px;text-transform:uppercase;letter-spacing:.5px}
+  p{margin-bottom:10px;color:#334155}
+  code{font-family:'JetBrains Mono',monospace;background:#f1f5f9;padding:2px 7px;border-radius:4px;font-size:12px;color:#0f172a}
+  pre{background:#0f172a;color:#e2e8f0;padding:16px 20px;border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.7;margin:12px 0;overflow-x:auto}
+  pre .c{color:#64748b} pre .kw{color:#93c5fd} pre .fn{color:#6ee7b7} pre .str{color:#fbbf24} pre .num{color:#f87171}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+  th{background:#1e40af;color:#fff;padding:8px 12px;text-align:left;font-weight:600}
+  td{padding:8px 12px;border-bottom:1px solid #e2e8f0}
+  tr:nth-child(even) td{background:#f8fafc}
+  .formula{background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:14px 18px;margin:12px 0;font-family:'JetBrains Mono',monospace;font-size:13px;color:#1e40af}
+  .box{border-radius:8px;padding:14px 18px;margin:12px 0}
+  .box.blue{background:#eff6ff;border-left:4px solid #3b82f6}
+  .box.green{background:#f0fdf4;border-left:4px solid #10b981}
+  .box.amber{background:#fffbeb;border-left:4px solid #f59e0b}
+  .box.red{background:#fef2f2;border-left:4px solid #ef4444}
+  .cover{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;padding:60px 50px;margin-bottom:40px;border-radius:12px}
+  .cover h1{color:#fff;border-bottom-color:rgba(255,255,255,.3);font-size:32px}
+  .cover .sub{font-size:15px;color:#93c5fd;margin-top:8px}
+  .cover .meta{margin-top:24px;font-size:12px;color:#94a3b8}
+  .toc a{display:block;color:#1e40af;text-decoration:none;padding:4px 0;font-size:13px}
+  .toc a:hover{text-decoration:underline}
+  .toc .l2{padding-left:20px;font-size:12px;color:#475569}
+  .badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600}
+  .badge.enter{background:#dcfce7;color:#15803d}
+  .badge.watch{background:#fef9c3;color:#854d0e}
+  .badge.avoid{background:#fee2e2;color:#991b1b}
+  .badge.blue{background:#dbeafe;color:#1d4ed8}
+  ul,ol{padding-left:22px;margin-bottom:10px}
+  li{margin-bottom:4px;color:#334155}
+  .rule-block{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:14px 18px;margin:10px 0}
+  .rule-block h4{margin-top:0;color:#0f172a}
+  .score-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #f1f5f9;font-size:13px}
+  .score-row:last-child{border-bottom:none}
+  .pts{font-weight:700;color:#2563eb;min-width:50px;text-align:right}
+  @media print{
+    body{font-size:12px}
+    .page{padding:20px 30px}
+    h2{page-break-before:auto}
+    pre{font-size:11px}
+    .cover{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    table thead{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .box,.formula,.rule-block{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    @page{margin:1.5cm;size:A4}
+  }
+  .print-btn{position:fixed;bottom:24px;right:24px;background:#3b82f6;color:#fff;border:none;border-radius:8px;padding:12px 22px;font-size:14px;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(59,130,246,.4)}
+  .print-btn:hover{background:#2563eb}
+  @media print{.print-btn{display:none}}
+  hr{border:none;border-top:1px solid #e2e8f0;margin:32px 0}
+</style>
+</head>
+<body>
+<div class="page">
+
+<button class="print-btn" onclick="window.print()">🖨️ Save as PDF</button>
+
+<!-- COVER -->
+<div class="cover">
+  <h1>IMLEP</h1>
+  <div class="sub">Indian Market Learning & Entry Planner</div>
+  <div class="sub" style="margin-top:6px;font-size:13px;color:#cbd5e1">Complete Logic, Methodology & Reasoning Documentation</div>
+  <div class="meta">
+    Version 1.0 &nbsp;·&nbsp; Nifty 50 Focus &nbsp;·&nbsp; Daily Timeframe &nbsp;·&nbsp; Equity Delivery<br>
+    Generated: April 2026
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<h2>Table of Contents</h2>
+<div class="toc">
+  <a href="#s1">1. Purpose & Philosophy</a>
+  <a href="#s2">2. Data Layer — Synthetic Price Generation</a>
+  <a href="#s3">3. Technical Indicators</a>
+  <a class="l2" href="#s3a">3.1 Simple Moving Average (SMA)</a>
+  <a class="l2" href="#s3b">3.2 Exponential Moving Average (EMA)</a>
+  <a class="l2" href="#s3c">3.3 Relative Strength Index (RSI)</a>
+  <a class="l2" href="#s3d">3.4 Average True Range (ATR)</a>
+  <a class="l2" href="#s3e">3.5 Highest High / Lowest Low</a>
+  <a class="l2" href="#s3f">3.6 Swing High / Swing Low</a>
+  <a class="l2" href="#s3g">3.7 Average Volume</a>
+  <a class="l2" href="#s3h">3.8 Bollinger Bands & MACD</a>
+  <a href="#s4">4. Market Regime Analysis</a>
+  <a href="#s5">5. Setup Detection Engine</a>
+  <a class="l2" href="#s5a">5.1 Breakout Setup</a>
+  <a class="l2" href="#s5b">5.2 Pullback to Support Setup</a>
+  <a class="l2" href="#s5c">5.3 Momentum Continuation Setup</a>
+  <a href="#s6">6. Transparent Scoring System</a>
+  <a href="#s7">7. Stop-Loss Logic</a>
+  <a href="#s8">8. Profit Target Logic</a>
+  <a href="#s9">9. Position Sizing (Risk Calculator)</a>
+  <a href="#s10">10. Entry Planner — Full Decision Flow</a>
+  <a href="#s11">11. Backtest Engine</a>
+  <a href="#s12">12. Trade Journal</a>
+  <a href="#s13">13. Risk Management Rules</a>
+  <a href="#s14">14. What the Labels Mean</a>
+  <a href="#s15">15. Limitations & Important Caveats</a>
+  <a href="#s16">16. Recommended Daily Workflow</a>
+</div>
+
+<hr>
+
+<!-- SECTION 1 -->
+<h2 id="s1">1. Purpose & Philosophy</h2>
+
+<p>IMLEP is not a signal generator. It is a <strong>structured decision framework</strong>. Its job is to make sure that every trade you consider has four things defined <em>before</em> you place the order:</p>
+
+<ol>
+  <li>A clear entry trigger (not emotion, not a tip)</li>
+  <li>A logical stop-loss (where the trade idea is proven wrong)</li>
+  <li>A realistic profit target (based on structure, not hope)</li>
+  <li>A correctly sized position (based on risk, not confidence)</li>
+</ol>
+
+<div class="box blue">
+  <strong>Core Principle:</strong> The tool's job is not to predict which stock will go up. Its job is to identify when the price action presents a structured, low-risk opportunity — and to keep you out when it does not.
+</div>
+
+<p>The tool operates on three levels simultaneously:</p>
+<table>
+  <tr><th>Level</th><th>Question Asked</th><th>Module</th></tr>
+  <tr><td>Market</td><td>Is the broad Nifty 50 environment supportive of new longs?</td><td>market.js</td></tr>
+  <tr><td>Stock</td><td>Is this specific stock showing a breakout, pullback, or momentum setup?</td><td>setups.js</td></tr>
+  <tr><td>Trade</td><td>Given entry and stop, how many shares should I buy?</td><td>risk.js</td></tr>
+</table>
+
+<p>All three levels must be satisfactory before a trade plan is generated.</p>
+
+<hr>
+
+<!-- SECTION 2 -->
+<h2 id="s2">2. Data Layer — Synthetic Price Generation</h2>
+
+<p>Since real-time broker APIs require authentication, IMLEP uses <strong>seeded synthetic OHLCV data</strong> generated via Geometric Brownian Motion (GBM). The same seed always produces the same data, making the tool deterministic and consistent across sessions.</p>
+
+<h3>Geometric Brownian Motion (GBM)</h3>
+<p>GBM is the standard academic model used to simulate stock price evolution. Each day's close is computed as:</p>
+
+<div class="formula">
+  S(t+1) = S(t) × exp(μ + σ × Z)<br><br>
+  where:<br>
+  μ  = daily drift (e.g. 0.0003 for ~7.5% annual return)<br>
+  σ  = daily volatility (e.g. 0.013 = 1.3% per day)<br>
+  Z  = standard normal random variable (simulated via sum of uniform RVs)
+</div>
+
+<p>Each stock has its own seed parameters reflecting real-world characteristics:</p>
+<table>
+  <tr><th>Symbol</th><th>Base Price</th><th>Daily Drift</th><th>Daily Vol</th><th>Why</th></tr>
+  <tr><td>RELIANCE</td><td>₹2,800</td><td>0.03%</td><td>1.3%</td><td>Large cap, moderate volatility</td></tr>
+  <tr><td>TATAMOTORS</td><td>₹980</td><td>0.05%</td><td>2.0%</td><td>High beta, JLR exposure</td></tr>
+  <tr><td>HINDUNILVR</td><td>₹2,480</td><td>0.01%</td><td>0.8%</td><td>Defensive FMCG, low vol</td></tr>
+  <tr><td>NIFTY50</td><td>₹22,500</td><td>0.02%</td><td>0.9%</td><td>Index is less volatile than stocks</td></tr>
+</table>
+
+<p>High (H), Low (L), and Open (O) are derived from the Close using random intra-day range scaling based on ATR-equivalent volatility. Volume spikes are added probabilistically on large-move days.</p>
+
+<div class="box amber">
+  <strong>Important:</strong> This synthetic data is for learning the tool's logic only. Real trading decisions must use actual market data from a broker API (e.g. Zerodha Kite Connect, Upstox API).
+</div>
+
+<hr>
+
+<!-- SECTION 3 -->
+<h2 id="s3">3. Technical Indicators</h2>
+
+<h3 id="s3a">3.1 Simple Moving Average (SMA)</h3>
+<p>The SMA is the arithmetic mean of the closing prices over N days. It smooths out daily noise to reveal the underlying trend direction.</p>
+
+<div class="formula">
+  SMA(N) at day t = (Close[t] + Close[t-1] + ... + Close[t-N+1]) / N
+</div>
+
+<p><strong>Why we use it:</strong></p>
+<ul>
+  <li><strong>20 SMA</strong> — short-term trend. If price is above it, short-term momentum is positive. Used as the first support in a pullback trade.</li>
+  <li><strong>50 SMA</strong> — primary trend. If price is above it, the stock is in a broad uptrend. This is the most important filter — we do not take long trades on stocks below their 50 SMA.</li>
+</ul>
+
+<p><strong>Golden Zone:</strong> When 20 SMA is above 50 SMA, the trend structure is strongly intact. This is the ideal environment for breakout and momentum trades.</p>
+
+<h3 id="s3b">3.2 Exponential Moving Average (EMA)</h3>
+<p>EMA gives more weight to recent prices, making it more responsive to new information than SMA.</p>
+
+<div class="formula">
+  k = 2 / (N + 1)<br>
+  EMA(t) = Close(t) × k + EMA(t-1) × (1 - k)
+</div>
+
+<p>We compute 9 EMA and 21 EMA for chart display. For signal logic, we rely on 20 SMA and 50 SMA as they are more widely watched by market participants, making them stronger support/resistance levels.</p>
+
+<h3 id="s3c">3.3 Relative Strength Index (RSI)</h3>
+<p>RSI, developed by J. Welles Wilder, measures the speed and magnitude of recent price changes. It oscillates between 0 and 100.</p>
+
+<div class="formula">
+  AvgGain = (Previous AvgGain × 13 + Today's Gain) / 14<br>
+  AvgLoss = (Previous AvgLoss × 13 + Today's Loss) / 14<br>
+  RS = AvgGain / AvgLoss<br>
+  RSI = 100 − (100 / (1 + RS))
+</div>
+
+<p><strong>How IMLEP uses RSI:</strong></p>
+<table>
+  <tr><th>RSI Range</th><th>Interpretation</th><th>Action</th></tr>
+  <tr><td>&lt; 30</td><td>Oversold</td><td>Potential reversal zone (pullback entry possible)</td></tr>
+  <tr><td>30 – 50</td><td>Weak momentum</td><td>Avoid new longs. Momentum not confirmed.</td></tr>
+  <tr><td>50 – 72</td><td>Constructive momentum</td><td>✓ Valid zone for breakout and momentum entries</td></tr>
+  <tr><td>72 – 80</td><td>Elevated / approaching overbought</td><td>Caution — late entry risk increases</td></tr>
+  <tr><td>&gt; 80</td><td>Overbought</td><td>✗ Block new entries — mean reversion risk high</td></tr>
+</table>
+
+<p><strong>Why 14-period RSI?</strong> Wilder's original formula used 14 periods, which balances sensitivity (shorter = too noisy) and lag (longer = too slow). It is the most widely used setting and therefore the most "respected" by the market.</p>
+
+<h3 id="s3d">3.4 Average True Range (ATR)</h3>
+<p>ATR, also by Wilder, measures <em>how much a stock moves on average in a day</em>, accounting for gaps. It is the foundation of all stop-loss and target calculations in this tool.</p>
+
+<div class="formula">
+  True Range(t) = MAX(<br>
+  &nbsp;&nbsp;High(t) − Low(t),<br>
+  &nbsp;&nbsp;|High(t) − Close(t-1)|,<br>
+  &nbsp;&nbsp;|Low(t) − Close(t-1)|<br>
+  )<br><br>
+  ATR(14) = (Previous ATR × 13 + Today's TR) / 14
+</div>
+
+<p><strong>Why ATR matters:</strong> A stock trading at ₹500 with ATR of ₹15 (3%) is much more volatile than one at ₹500 with ATR of ₹5 (1%). A fixed 2% stop treats both the same — ATR-based stops adapt to each stock's actual daily movement, so you are not stopped out by normal noise.</p>
+
+<h4>ATR Usage in IMLEP:</h4>
+<div class="formula">
+  Stop-Loss = Entry − (1.5 × ATR)  &nbsp;&nbsp;← default multiplier<br>
+  Target 1  = Entry + (2.0 × ATR)  &nbsp;&nbsp;← gives R:R ≥ 2:1 if stop = 1.5× ATR<br>
+  Target 2  = Entry + (3.0 × ATR)
+</div>
+
+<h3 id="s3e">3.5 Highest High / Lowest Low (N-period)</h3>
+<div class="formula">
+  HighestHigh(N) = MAX(High[t-N+1], ..., High[t])<br>
+  LowestLow(N)   = MIN(Low[t-N+1], ..., Low[t])
+</div>
+
+<p><strong>Used for:</strong> Identifying the resistance level for breakout trades. If today's close exceeds the highest high of the previous 20 days, a breakout is confirmed.</p>
+
+<h3 id="s3f">3.6 Swing High / Swing Low Detection</h3>
+<p>A swing high at bar <code>i</code> exists when <code>High[i]</code> is greater than all highs in the N bars before and after it. Swing lows are the mirror image.</p>
+
+<div class="formula">
+  SwingHigh at i: High[i] > High[i-N..i-1] AND High[i] > High[i+1..i+N]
+</div>
+
+<p><strong>Used for:</strong> Setting logical stop-loss levels. Placing a stop below the nearest swing low means your stop is at a structurally significant level — not an arbitrary number.</p>
+
+<h3 id="s3g">3.7 Average Volume</h3>
+<div class="formula">
+  AvgVol(20) = SMA of Volume over 20 days<br>
+  Volume Ratio = Today's Volume / AvgVol(20)
+</div>
+
+<p><strong>Why volume matters:</strong> A price move on high volume has more conviction than the same move on low volume. In a breakout, volume ≥ 1.5× average indicates that a significant number of participants are committing money to the new level — this reduces the probability of a false breakout.</p>
+
+<h3 id="s3h">3.8 Bollinger Bands & MACD</h3>
+<p>Computed for chart display. Bollinger Bands (20-period, 2 standard deviations) show when price is statistically stretched. MACD (12/26/9) confirms trend direction. These are not used in signal logic but can be observed on charts for additional context.</p>
+
+<hr>
+
+<!-- SECTION 4 -->
+<h2 id="s4">4. Market Regime Analysis</h2>
+
+<p>Before any stock is evaluated, IMLEP assesses the broad Nifty 50 environment. This is based on the principle that <strong>systematic risk (market-wide risk) cannot be eliminated by picking better stocks</strong>. A good setup in a bad market has a lower probability of success.</p>
+
+<h3>Scoring Model (Nifty 50)</h3>
+<div class="score-row"><span>Nifty 50 above 20 SMA</span><span class="pts">+25 pts</span></div>
+<div class="score-row"><span>Nifty 50 above 50 SMA</span><span class="pts">+30 pts</span></div>
+<div class="score-row"><span>20 SMA above 50 SMA (Golden Zone)</span><span class="pts">+20 pts</span></div>
+<div class="score-row"><span>RSI between 50–75 (Momentum zone)</span><span class="pts">+15 pts</span></div>
+<div class="score-row"><span>Normal volatility (ATR% &lt; 1.5%)</span><span class="pts">+10 pts</span></div>
+
+<h3>Regime Classification</h3>
+<table>
+  <tr><th>Score</th><th>Regime</th><th>Suitable Setups</th></tr>
+  <tr><td>80–100</td><td>Strong Uptrend</td><td>Breakout, Momentum, Pullback</td></tr>
+  <tr><td>55–79</td><td>Moderate Uptrend</td><td>Pullback to support only</td></tr>
+  <tr><td>35–54</td><td>Choppy / Sideways</td><td>Tight pullbacks only, reduce size</td></tr>
+  <tr><td>0–34</td><td>Downtrend / Weak</td><td>None — preserve capital</td></tr>
+</table>
+
+<h3>Sector Relative Strength</h3>
+<p>Each sector's 20-day return is compared against the Nifty 50's 20-day return. A sector showing a higher return than the index is "Leading" — stocks within it have a market tailwind. A "Lagging" sector means headwinds even for good stocks within it.</p>
+<div class="formula">
+  Relative Strength = Sector 20D Return − Nifty 20D Return<br>
+  Leading: RS > +1% &nbsp;|&nbsp; Lagging: RS < −1%
+</div>
+
+<hr>
+
+<!-- SECTION 5 -->
+<h2 id="s5">5. Setup Detection Engine</h2>
+
+<p>IMLEP detects exactly <strong>3 types of setups</strong>. Fewer setups = higher quality filter = fewer but better trades. Each setup has hard entry conditions (must all be true) and a scoring system (must reach threshold).</p>
+
+<h3 id="s5a">5.1 Breakout Setup</h3>
+
+<div class="box blue">
+  <strong>Concept:</strong> A stock that breaks above a significant resistance level (recent high) with strong volume has more participants committing to higher prices. This reduces the probability of a false move.
+</div>
+
+<h4>Hard Entry Conditions (all must be true for valid=true):</h4>
+<div class="rule-block">
+  <ul>
+    <li>Today's close &gt; Highest High of previous 20 trading days</li>
+    <li>Stock is above its 20 SMA</li>
+    <li>Stock is above its 50 SMA</li>
+    <li>Setup score ≥ 50</li>
+    <li>R:R of generated plan ≥ 2.0</li>
+  </ul>
+</div>
+
+<h4>Scoring Breakdown:</h4>
+<div class="score-row"><span>Market regime supportive (score ≥ 55)</span><span class="pts">+20</span></div>
+<div class="score-row"><span>Stock above 50 SMA</span><span class="pts">+15</span></div>
+<div class="score-row"><span>Stock above 20 SMA</span><span class="pts">+10</span></div>
+<div class="score-row"><span>Price above 20-day high</span><span class="pts">+20</span></div>
+<div class="score-row"><span>Volume ≥ 1.5× 20-day average</span><span class="pts">+15</span></div>
+<div class="score-row"><span>RSI between 50–70</span><span class="pts">+10</span></div>
+<div class="score-row"><span>Volume below threshold</span><span class="pts">−5</span></div>
+
+<h4>Trade Levels:</h4>
+<div class="formula">
+  Entry  = Last Close × 1.001  (0.1% buffer above close)<br>
+  Stop   = MIN(Recent Swing Low, Entry − 1.5×ATR)<br>
+  Target1 = Entry + 2 × (Entry − Stop)<br>
+  Target2 = Entry + 3 × (Entry − Stop)
+</div>
+
+<h4>Plain-English Reasoning Generated:</h4>
+<p><em>"Price broke above [N]-day resistance with [X]× average volume in a [regime] market. Breakout with strong volume reduces the probability of a false move."</em></p>
+
+<h3 id="s5b">5.2 Pullback to Support Setup</h3>
+
+<div class="box green">
+  <strong>Concept:</strong> In an uptrend, stocks routinely pull back to their moving averages before resuming the trend. Buying near support gives a tighter stop-loss and better R:R than chasing after a large move.
+</div>
+
+<h4>Hard Entry Conditions:</h4>
+<div class="rule-block">
+  <ul>
+    <li>50 SMA is rising (today's 50 SMA &gt; 50 SMA 20 days ago)</li>
+    <li>Stock is above 50 SMA (uptrend intact despite pullback)</li>
+    <li>Price is within 3% of either 20 SMA or 50 SMA</li>
+    <li>Setup score ≥ 55</li>
+    <li>R:R of generated plan ≥ 2.0</li>
+  </ul>
+</div>
+
+<h4>Scoring Breakdown:</h4>
+<div class="score-row"><span>Market regime supportive</span><span class="pts">+20</span></div>
+<div class="score-row"><span>50 SMA rising (uptrend confirmed)</span><span class="pts">+15</span></div>
+<div class="score-row"><span>Stock above 50 SMA (trend intact)</span><span class="pts">+15</span></div>
+<div class="score-row"><span>Price near 20 or 50 SMA support</span><span class="pts">+20</span></div>
+<div class="score-row"><span>Price stabilizing (avg range &lt; 1.1×ATR)</span><span class="pts">+15</span></div>
+<div class="score-row"><span>Pullback on lighter volume (&lt;1.2× avg)</span><span class="pts">+10</span></div>
+<div class="score-row"><span>RSI between 40–65 (reset not oversold)</span><span class="pts">+5</span></div>
+
+<h4>Trade Levels:</h4>
+<div class="formula">
+  Support Level = 20 SMA (if near it) or 50 SMA<br>
+  Entry  = Last Close × 1.001<br>
+  Stop   = Support Level − (0.75 × ATR)  ← tighter than breakout<br>
+  Target1 = Entry + 2 × (Entry − Stop)<br>
+  Target2 = Entry + 3 × (Entry − Stop)
+</div>
+
+<p><strong>Why the stop is tighter here:</strong> In a pullback trade, you are entering near a known support level. The stop only needs to go slightly below that level — if support breaks, the thesis is immediately invalid. This tighter stop allows a larger position size for the same capital at risk.</p>
+
+<h3 id="s5c">5.3 Momentum Continuation Setup</h3>
+
+<div class="box amber">
+  <strong>Concept:</strong> A stock that is trending with constructive RSI (not overbought) and a positive recent return may continue trending. The risk is entering too late or too close to resistance.
+</div>
+
+<h4>Hard Entry Conditions:</h4>
+<div class="rule-block">
+  <ul>
+    <li>Stock above 20 SMA</li>
+    <li>Stock above 50 SMA</li>
+    <li>20 SMA above 50 SMA (golden zone)</li>
+    <li>RSI between 55 and 72</li>
+    <li>Price is NOT within 2% of the 20-day high (not near a resistance wall)</li>
+    <li>Setup score ≥ 60</li>
+    <li>R:R ≥ 2.0</li>
+  </ul>
+</div>
+
+<h4>Scoring Breakdown:</h4>
+<div class="score-row"><span>Strong market (score ≥ 70)</span><span class="pts">+20</span></div>
+<div class="score-row"><span>Moderate market (55–69)</span><span class="pts">+10</span></div>
+<div class="score-row"><span>Above 50 SMA</span><span class="pts">+15</span></div>
+<div class="score-row"><span>Above 20 SMA</span><span class="pts">+10</span></div>
+<div class="score-row"><span>20 SMA above 50 SMA</span><span class="pts">+15</span></div>
+<div class="score-row"><span>RSI 55–72 (constructive)</span><span class="pts">+20</span></div>
+<div class="score-row"><span>20-day return &gt; 2%</span><span class="pts">+10</span></div>
+<div class="score-row"><span>Price near 20-day high (resistance)</span><span class="pts">−15</span></div>
+
+<h4>Trade Levels:</h4>
+<div class="formula">
+  Entry  = Last Close × 1.001<br>
+  Stop   = Entry − 1.5 × ATR  (ATR-only stop, no swing low anchor)<br>
+  Target1 = Entry + 2 × (Entry − Stop) = Entry + 3.0 × ATR<br>
+  Target2 = Entry + 3 × (Entry − Stop) = Entry + 4.5 × ATR
+</div>
+
+<hr>
+
+<!-- SECTION 6 -->
+<h2 id="s6">6. Transparent Scoring System</h2>
+
+<p>Every stock gets a score from 0–100 built from 7 observable, explainable components. There is no black box:</p>
+
+<table>
+  <tr><th>#</th><th>Factor</th><th>Max Points</th><th>Why It Matters</th></tr>
+  <tr><td>1</td><td>Market Regime Supportive</td><td>20</td><td>Broad market tailwind reduces failure rate</td></tr>
+  <tr><td>2</td><td>Stock Above 50 SMA</td><td>15</td><td>Primary trend is up — we only trade with the trend</td></tr>
+  <tr><td>3</td><td>Stock Above 20 SMA</td><td>10</td><td>Short-term momentum aligned</td></tr>
+  <tr><td>4</td><td>Breakout Above Resistance</td><td>20</td><td>Price action confirms the move</td></tr>
+  <tr><td>5</td><td>Volume Confirmation</td><td>15</td><td>Strong participation reduces false breakout risk</td></tr>
+  <tr><td>6</td><td>RSI Constructive</td><td>10</td><td>Momentum is healthy, not overbought</td></tr>
+  <tr><td>7</td><td>R:R ≥ 2:1</td><td>10</td><td>Expected value positive only with adequate reward</td></tr>
+</table>
+
+<h3>Decision Thresholds</h3>
+<table>
+  <tr><th>Score</th><th>Decision</th><th>Meaning</th></tr>
+  <tr><td>80–100</td><td><span class="badge enter">ENTER</span></td><td>Setup is high quality. All major conditions met.</td></tr>
+  <tr><td>60–79</td><td><span class="badge watch">WATCH</span></td><td>Setup forming but incomplete. Monitor daily.</td></tr>
+  <tr><td>1–59</td><td><span class="badge avoid">AVOID</span></td><td>Setup flawed. One or more key conditions missing.</td></tr>
+  <tr><td>0</td><td><span class="badge blue">NO SETUP</span></td><td>No setup detected at all. Normal state for most stocks.</td></tr>
+</table>
+
+<div class="box green">
+  <strong>Key learning:</strong> Most stocks show "NO SETUP" on most days. This is the correct result. The tool is strict on purpose — forcing a trade when no setup exists is how beginners lose money.
+</div>
+
+<hr>
+
+<!-- SECTION 7 -->
+<h2 id="s7">7. Stop-Loss Logic</h2>
+
+<p>The stop-loss must be placed where the trade thesis is <strong>proven wrong</strong> — not at a random percentage, and not based on what you can afford to lose per share. The position size is adjusted to control loss, not the stop distance.</p>
+
+<h3>Three Layers of Stop Logic</h3>
+
+<div class="rule-block">
+  <h4>Layer 1 — ATR-Based Floor</h4>
+  <p>The ATR stop ensures you are not stopped out by routine daily noise.</p>
+  <code>ATR Stop = Entry − (1.5 × ATR14)</code>
+  <p style="margin-top:8px">If a stock's ATR is ₹20, the minimum stop distance is ₹30. You will not be shaken out by a normal day's movement.</p>
+</div>
+
+<div class="rule-block">
+  <h4>Layer 2 — Swing Low Anchor</h4>
+  <p>For breakout trades, the stop also checks the most recent swing low. A swing low is a price level where buyers previously entered and the stock bounced — a logical structural support.</p>
+  <code>SwingLow Stop = Most recent swing low below entry</code>
+  <p style="margin-top:8px">The final stop is the <strong>lower</strong> of ATR stop and swing low. This gives the trade more room when the swing low is significantly below entry, but keeps the stop tight via ATR when no nearby swing low exists.</p>
+</div>
+
+<div class="rule-block">
+  <h4>Layer 3 — Support Zone for Pullback Trades</h4>
+  <p>For pullback trades, the stop goes below the MA support level:</p>
+  <code>Stop = SupportMA − (0.75 × ATR14)</code>
+  <p style="margin-top:8px">This 0.75× multiplier (vs 1.5× for breakouts) is tighter because in a pullback trade, if support breaks cleanly, the setup is immediately invalidated.</p>
+</div>
+
+<h3>Why Not "Always 5%"?</h3>
+<p>A fixed 5% stop ignores volatility. A 5% stop on a stock with 1% daily ATR is fine. But on a stock with 3% daily ATR (like TATAMOTORS), a 5% stop can be triggered by routine intra-day noise in 2 days. ATR-based stops adapt to each stock's actual price behaviour.</p>
+
+<hr>
+
+<!-- SECTION 8 -->
+<h2 id="s8">8. Profit Target Logic</h2>
+
+<h3>Why 2:1 Minimum Reward:Risk?</h3>
+<p>Even with only a 40% win rate, a strategy with 2:1 R:R is profitable:</p>
+<div class="formula">
+  Expected Value = (Win Rate × Avg Win) − (Loss Rate × Avg Loss)<br>
+  = (0.4 × 2) − (0.6 × 1) = 0.8 − 0.6 = +0.2 per trade
+</div>
+<p>This means you gain ₹0.20 expected value for every ₹1 risked, even being right only 40% of the time. At 1:1 R:R, you need >50% win rate just to break even after costs.</p>
+
+<h3>Two Targets</h3>
+<table>
+  <tr><th>Target</th><th>Formula</th><th>Suggested Action</th></tr>
+  <tr><td>Target 1</td><td>Entry + 2R (2× the risk per share)</td><td>Book 50–100% of position here</td></tr>
+  <tr><td>Target 2</td><td>Entry + 3R (3× the risk per share)</td><td>Trail remaining position with stop at Entry+1R</td></tr>
+</table>
+
+<div class="box blue">
+  <strong>Trailing Stop logic:</strong> Once price hits Target 1, move stop to Entry + 1R (breakeven + 1× risk). This locks in a minimum win and lets the position run toward Target 2 with no fear of turning a winner into a loser.
+</div>
+
+<h3>Trade Rejection — R:R Filter</h3>
+<p>If the calculated R:R at Target 1 is below 2.0, the trade plan is <strong>rejected entirely</strong> — even if all other conditions are met. A trade where you risk ₹5 to make ₹8 (1.6:1) does not provide enough cushion to be profitable over many trades after costs and occasional losses.</p>
+
+<hr>
+
+<!-- SECTION 9 -->
+<h2 id="s9">9. Position Sizing (Risk Calculator)</h2>
+
+<p>Position sizing is the most important risk management tool available to a retail trader. The formula ensures that no single trade can result in a loss greater than your defined risk limit, regardless of which stock or setup you are trading.</p>
+
+<h3>The Formula</h3>
+<div class="formula">
+  Capital at Risk (₹) = Total Capital × Risk%<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= ₹2,00,000 × 1% = ₹2,000<br><br>
+  Risk per Share (₹) = Entry Price − Stop Price<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= ₹500 − ₹480 = ₹20<br><br>
+  Position Size = Capital at Risk / Risk per Share<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= ₹2,000 / ₹20 = 100 shares<br><br>
+  Position Value = 100 × ₹500 = ₹50,000 (25% of capital)
+</div>
+
+<p><strong>The key insight:</strong> Your stop distance controls position size. A wider stop = fewer shares (same ₹ risk). A tighter stop = more shares (same ₹ risk). The rupee risk stays constant.</p>
+
+<h3>India-Specific Transaction Costs</h3>
+<table>
+  <tr><th>Cost Component</th><th>Rate</th><th>Applied On</th></tr>
+  <tr><td>Brokerage (flat)</td><td>₹20 per side</td><td>Both entry and exit</td></tr>
+  <tr><td>Slippage</td><td>0.1% of fill price</td><td>Both entry and exit × quantity</td></tr>
+  <tr><td>STT (Securities Transaction Tax)</td><td>0.1% on sell side</td><td>Exit value only (equity delivery)</td></tr>
+  <tr><td>Exchange Transaction Charge</td><td>0.00345%</td><td>Turnover</td></tr>
+</table>
+
+<p>All costs are deducted from the net profit calculation. This is critical — many backtests fail in live trading because costs were ignored.</p>
+
+<h3>Portfolio-Level Limits</h3>
+<table>
+  <tr><th>Rule</th><th>Default</th><th>Reason</th></tr>
+  <tr><td>Max risk per trade</td><td>1% of capital</td><td>10 losing trades in a row = only 10% drawdown</td></tr>
+  <tr><td>Max open positions</td><td>6</td><td>Forces selectivity; prevents over-diversification</td></tr>
+  <tr><td>Max single stock</td><td>20% of capital</td><td>Concentration risk control</td></tr>
+  <tr><td>Max sector exposure</td><td>40% of capital</td><td>Sector-wide events shouldn't ruin the portfolio</td></tr>
+  <tr><td>Daily loss circuit breaker</td><td>2% of capital</td><td>Stop trading if daily loss exceeds ₹4,000 on ₹2L</td></tr>
+</table>
+
+<hr>
+
+<!-- SECTION 10 -->
+<h2 id="s10">10. Entry Planner — Full Decision Flow</h2>
+
+<p>The Entry Planner chains all modules together into one decision:</p>
+
+<pre>
+<span class="c">Step 1: Load candles for selected symbol (365 days)</span>
+<span class="c">Step 2: Compute all indicators (SMA, RSI, ATR, Vol, SwingHighs, etc.)</span>
+<span class="c">Step 3: analyseMarket() → get market regime score &amp; classification</span>
+<span class="c">Step 4: detectBreakout() → returns {valid, confidence, entry, stop, target1}</span>
+<span class="c">Step 5: detectPullback() → same structure</span>
+<span class="c">Step 6: detectMomentum() → same structure</span>
+<span class="c">Step 7: Filter candidates: valid === true AND rr >= minRR (2.0)</span>
+<span class="c">Step 8: Pick highest-confidence valid setup</span>
+<span class="c">Step 9: calculatePosition() → quantity, costs, net P&L, R:R net of costs</span>
+<span class="c">Step 10: buildScoringBreakdown() → transparent 7-factor scorecard</span>
+<span class="c">Step 11: getDecision(score) → ENTER / WATCH / AVOID / NO SETUP</span>
+<span class="c">Step 12: Render full trade plan with plain-English reasoning</span>
+</pre>
+
+<p>If no valid setup is found (all three return valid=false or rr &lt; 2.0), the decision is "NO SETUP" and the planner explains exactly which conditions failed for each setup type.</p>
+
+<hr>
+
+<!-- SECTION 11 -->
+<h2 id="s11">11. Backtest Engine</h2>
+
+<p>The backtest runs the breakout strategy over 500 days of synthetic data and produces a complete trade-by-trade log with metrics.</p>
+
+<h3>Entry Logic (same as live):</h3>
+<div class="formula">
+  Signal = Close > 20-Day High<br>
+        AND Close > 20 SMA AND Close > 50 SMA<br>
+        AND Volume >= 1.5× AvgVol<br>
+        AND RSI > 50 AND RSI &lt; 70<br>
+        AND computed R:R >= minRR (2.0)
+</div>
+
+<h3>Exit Logic:</h3>
+<table>
+  <tr><th>Condition</th><th>Exit At</th></tr>
+  <tr><td>Low of day hits stop</td><td>Stop price (with 0.1% slippage)</td></tr>
+  <tr><td>High of day hits Target 1</td><td>Target 1 price (with 0.1% slippage)</td></tr>
+  <tr><td>End of data period</td><td>Closing price of last candle</td></tr>
+</table>
+
+<h3>Performance Metrics</h3>
+<table>
+  <tr><th>Metric</th><th>Formula</th><th>Good Value</th></tr>
+  <tr><td>Win Rate</td><td>Winning Trades / Total Trades × 100</td><td>&gt; 45%</td></tr>
+  <tr><td>Profit Factor</td><td>Total Gross Wins / Total Gross Losses</td><td>&gt; 1.5</td></tr>
+  <tr><td>Max Drawdown</td><td>Largest peak-to-trough equity decline</td><td>&lt; 20%</td></tr>
+  <tr><td>Sharpe Ratio</td><td>(Avg Daily Return / Std Dev) × √252</td><td>&gt; 1.0</td></tr>
+  <tr><td>CAGR</td><td>(Final/Initial)^(1/years) − 1 × 100</td><td>&gt; 12%</td></tr>
+  <tr><td>Net P&L</td><td>Sum of all trade P&Ls after costs</td><td>Positive</td></tr>
+</table>
+
+<div class="box red">
+  <strong>Critical Warning:</strong> A profitable backtest on synthetic data does NOT mean the strategy will be profitable in real markets. Backtests suffer from: (1) look-ahead bias, (2) overfitting, (3) survivorship bias, (4) inability to capture real slippage, and (5) regime changes. Use backtest results to understand rule behaviour, not to predict profits.
+</div>
+
+<hr>
+
+<!-- SECTION 12 -->
+<h2 id="s12">12. Trade Journal</h2>
+
+<p>The journal is the learning core of IMLEP. It stores each trade with these fields:</p>
+
+<table>
+  <tr><th>Field</th><th>Purpose</th></tr>
+  <tr><td>Date, Symbol, Sector</td><td>Basic identification</td></tr>
+  <tr><td>Setup Type</td><td>Were you following designated rules?</td></tr>
+  <tr><td>Market Regime at Entry</td><td>Did the market environment support the trade?</td></tr>
+  <tr><td>Entry, Stop, Target, Qty, R:R</td><td>Complete trade plan at entry</td></tr>
+  <tr><td>Followed Rules (Y/N)</td><td>Tracks discipline — separate from outcome</td></tr>
+  <tr><td>Thesis</td><td>Why you entered in plain English</td></tr>
+  <tr><td>Exit Date, Exit Price, P&L</td><td>Actual result</td></tr>
+  <tr><td>Lesson Learned</td><td>What would you do differently?</td></tr>
+  <tr><td>Process Rating (1–5)</td><td>Rate your process quality, NOT the outcome</td></tr>
+</table>
+
+<h3>Why "Followed Rules" and "Process Rating" matter</h3>
+<p>A trade that breaks rules and makes a profit is more dangerous than a trade that follows rules and loses. The profitable rule-breaking trade reinforces bad habits. The journal separates <strong>process quality from outcome quality</strong> so you improve the right thing.</p>
+
+<h3>Journal Statistics</h3>
+<div class="formula">
+  Win Rate = Winning Trades / Closed Trades × 100<br>
+  Profit Factor = Total Win ₹ / Total Loss ₹<br>
+  Rules Followed % = Rule-Compliant Trades / Total Trades × 100
+</div>
+
+<hr>
+
+<!-- SECTION 13 -->
+<h2 id="s13">13. Risk Management Rules</h2>
+
+<h3>Non-Negotiable Rules Built Into the Tool</h3>
+<ol>
+  <li><strong>Never enter a trade with R:R below 2:1.</strong> The tool rejects the trade plan automatically.</li>
+  <li><strong>Never size a trade by confidence.</strong> Size is always set by the position sizing formula.</li>
+  <li><strong>Never enter a long without checking market regime first.</strong> Market View tab must be checked before Entry Planner.</li>
+  <li><strong>Daily loss limit: 2% of capital.</strong> If the circuit breaker triggers, no new trades that day.</li>
+  <li><strong>Max 6 open positions.</strong> Too many positions dilute attention and concentrate risk invisibly.</li>
+</ol>
+
+<h3>Volatility-Adjusted Stop Rule</h3>
+<p>In high-volatility market conditions (ATR% &gt; 1.5% of price), the tool flags a warning. In these conditions, stops must be wider, which reduces position size automatically — providing natural protection during turbulent markets.</p>
+
+<hr>
+
+<!-- SECTION 14 -->
+<h2 id="s14">14. What the Labels Mean</h2>
+
+<table>
+  <tr><th>Label</th><th>Score</th><th>Correct Interpretation</th></tr>
+  <tr><td><span class="badge enter">ENTER</span></td><td>80+</td><td>A high-quality setup is present. All rules met. Plan the trade precisely before acting.</td></tr>
+  <tr><td><span class="badge watch">WATCH</span></td><td>60–79</td><td>Setup is forming but incomplete. One or two conditions missing. Set a price alert and check tomorrow.</td></tr>
+  <tr><td><span class="badge avoid">AVOID</span></td><td>1–59</td><td>A setup was partially detected but did not score high enough. Multiple conditions failing.</td></tr>
+  <tr><td><span class="badge blue">NO SETUP</span></td><td>0</td><td>No pattern detected at all. Stock is in a middle zone. Normal state. Wait without stress.</td></tr>
+</table>
+
+<div class="box amber">
+  <strong>Important:</strong> "NO SETUP" for RELIANCE or any other stock does NOT mean the company is bad. It means right now, the price action does not show a structured, low-risk entry point. Reliance may show ENTER next week.
+</div>
+
+<hr>
+
+<!-- SECTION 15 -->
+<h2 id="s15">15. Limitations & Important Caveats</h2>
+
+<div class="box red">
+  <h3 style="color:#991b1b;margin-bottom:10px">Read This Before Using Real Money</h3>
+  <ul>
+    <li><strong>Synthetic data is not real market data.</strong> Results shown in the app use simulated prices. Signals on real data will differ.</li>
+    <li><strong>No setup guarantees profit.</strong> Even a perfect 90/100 score can result in a loss. The market always has the final say.</li>
+    <li><strong>Past backtests do not predict future performance.</strong> Markets change regimes, volatility patterns change, and profitable rules can stop working.</li>
+    <li><strong>Gaps and circuit filters are not modelled.</strong> In real markets, stocks can gap below your stop-loss, making your actual loss larger than calculated.</li>
+    <li><strong>This tool does not account for fundamental analysis.</strong> A technically sound setup on a fundamentally weak company (high debt, falling earnings) carries additional risk not captured by price patterns.</li>
+    <li><strong>SEBI regulations apply.</strong> For Indian markets, you must trade within your broker's API framework. This tool is for personal decision-making support, not automated algo trading.</li>
+    <li><strong>Start with paper trading.</strong> Use the Journal to track hypothetical trades before committing real capital. Validate that the tool's signals make sense in real market conditions.</li>
+  </ul>
+</div>
+
+<hr>
+
+<!-- SECTION 16 -->
+<h2 id="s16">16. Recommended Daily Workflow</h2>
+
+<p>Follow this sequence every trading day to use the tool correctly:</p>
+
+<table>
+  <tr><th>Step</th><th>Tab</th><th>Action</th><th>Decision Gate</th></tr>
+  <tr><td>1</td><td>Market View</td><td>Check Nifty 50 regime and sector strength</td><td>If regime is Choppy or Weak → stop here. No new trades.</td></tr>
+  <tr><td>2</td><td>Watchlist</td><td>See which stocks show ENTER or WATCH badges</td><td>Only pursue stocks where sector is Leading or In-line</td></tr>
+  <tr><td>3</td><td>Watchlist</td><td>Click the best candidate. Review its price and RSI charts</td><td>Confirm visually that the chart looks consistent with the signal</td></tr>
+  <tr><td>4</td><td>Entry Planner</td><td>Select the stock. Generate the full trade plan.</td><td>Check: Is R:R ≥ 2? Does the reasoning make sense? Is stop logical?</td></tr>
+  <tr><td>5</td><td>Risk Calculator</td><td>Input your actual capital and verify position size</td><td>Is position value &lt; 20% of capital? Is risk &lt; 1%?</td></tr>
+  <tr><td>6</td><td>—</td><td>Place the trade with a limit order at entry price</td><td>Set a price alert at stop-loss level immediately</td></tr>
+  <tr><td>7</td><td>Trade Journal</td><td>Log the trade before market close</td><td>Write the thesis in plain English while it is fresh</td></tr>
+  <tr><td>8</td><td>Trade Journal</td><td>Record outcome when trade closes</td><td>Write the lesson, rate the process (1–5), not the result</td></tr>
+</table>
+
+<div class="box green">
+  <strong>The goal of this workflow:</strong> Never enter a trade without a pre-defined stop-loss, target, and position size. The professional edge is not in predicting where a stock goes — it is in having a complete plan before you act, and executing it without emotion.
+</div>
+
+<hr>
+<p style="text-align:center;color:#94a3b8;font-size:12px;margin-top:24px">
+  IMLEP v1.0 &nbsp;·&nbsp; Indian Market Learning &amp; Entry Planner &nbsp;·&nbsp; For Educational Use Only<br>
+  This document does not constitute investment advice. All trading involves risk. Consult a SEBI-registered advisor for personal investment guidance.
+</p>
+
+</div>
+</body>
+</html>

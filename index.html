@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Indian Market Learning & Entry Planner — structured trade decisions with entry, stop-loss, targets, position sizing and plain-English reasoning for Nifty 50 stocks.">
+  <title>IMLEP — Indian Market Learning & Entry Planner</title>
+
+  <!-- Design system -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ── Header ────────────────────────────────────────────────────────────── -->
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="app-logo">
+        <div class="logo-mark">📈</div>
+        <div class="logo-text">
+          IMLEP
+          <span class="logo-sub">Indian Market Learning & Entry Planner</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="market-pill">
+          <span class="dot"></span>
+          <span id="header-nifty">Nifty 50 — Loading…</span>
+        </div>
+        <span id="header-time"></span>
+        <span style="color:#475569">IST</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Navigation ────────────────────────────────────────────────────────── -->
+  <nav class="app-nav">
+    <div class="nav-inner">
+      <button class="nav-tab active" data-tab="market">🌍 Market View</button>
+      <button class="nav-tab" data-tab="watchlist">👁 Watchlist</button>
+      <button class="nav-tab" data-tab="planner">🎯 Entry Planner</button>
+      <button class="nav-tab" data-tab="risk">🛡 Risk Calculator</button>
+      <button class="nav-tab" data-tab="journal">📒 Trade Journal</button>
+      <button class="nav-tab" data-tab="backtest">🔬 Backtest Lab</button>
+    </div>
+  </nav>
+
+  <!-- ── Main Content ───────────────────────────────────────────────────────── -->
+  <main class="app-main">
+    <div id="tab-content">
+      <!-- Rendered by app.js -->
+    </div>
+  </main>
+
+  <!-- ── Footer ────────────────────────────────────────────────────────────── -->
+  <footer class="app-footer">
+    <strong>Disclaimer:</strong> This tool uses <em>synthetic simulated data</em> for education only. It does not provide investment advice. Past performance does not guarantee future results.
+    All trading involves risk. Start small. Capital preservation comes first. SEBI registered advisors exist for a reason.
+  </footer>
+
+</div>
+
+<!--
+  Script load order matches the prescribed build order:
+  config → universe → data → indicators → market → setups → risk → planner → journal → backtest → charts → app
+-->
+<script src="js/config.js"></script>
+<script src="js/universe.js"></script>
+<script src="js/data.js"></script>
+<script src="js/indicators.js"></script>
+<script src="js/market.js"></script>
+<script src="js/setups.js"></script>
+<script src="js/risk.js"></script>
+<script src="js/planner.js"></script>
+<script src="js/journal.js"></script>
+<script src="js/backtest.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+
+<script>
+  // ── Header clock & Nifty pill ─────────────────────────────────────────────
+  function updateClock() {
+    const now = new Date();
+    const ist = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'Asia/Kolkata' });
+    const el = document.getElementById('header-time');
+    if (el) el.textContent = ist;
+  }
+
+  function updateHeaderNifty() {
+    const q = getLatestQuote('NIFTY50');
+    const el = document.getElementById('header-nifty');
+    if (el && q) {
+      const sign = q.change >= 0 ? '+' : '';
+      el.textContent = `Nifty 50: ${q.price.toLocaleString('en-IN')} ${sign}${q.changePct.toFixed(2)}%`;
+      el.style.color = q.change >= 0 ? '#10b981' : '#ef4444';
+    }
+  }
+
+  setInterval(updateClock, 1000);
+  updateClock();
+
+  // Update header after scripts load
+  window.addEventListener('load', () => {
+    setTimeout(updateHeaderNifty, 200);
+  });
+</script>
+
+</body>
+</html>
